@@ -1,3 +1,6 @@
+/**
+ * View ist die Klasse für alle Ausgaben auf dem Terminal.
+ */
 public class View {
 
 	private SpielFeld spiel;
@@ -6,7 +9,9 @@ public class View {
 		this.spiel = spiel;
 	}
 
-	// anzeigen gibt das aktuelle Spielfeld auf dem Bildschirm aus.
+	/** 
+	 * anzeigen gibt das aktuelle Spielfeld auf dem Bildschirm aus.
+	 */
 	public void zeigeSpielfeld() {
 		String[] pfade = { "|\\|/|\\|/|", "|/|\\|/|\\|" };
 		Position position = new Position();
@@ -51,13 +56,20 @@ public class View {
 		System.out.println();
 	}
 
-	// zeigeError gibt einer Exception auf dem Bildschirm aus.
+	/**
+	 *  zeigeError gibt einer Exception auf dem Bildschirm aus.
+	 * 
+	 * @param e	ist eine Exception, deren Text ausgegeben wird.
+	 */
 	public static void zeigeError(Exception e) {
 		System.out.println("ERROR: " + e.getMessage());
 	}
 
-	// zeigeSpieler gibt auf dem Bildschirm aus, welcher Spieler gerade am Zug ist.
-	// Wenn Parameter True: Ziege, Wenn Parameter False: Tiger.
+	/**
+	 *  zeigeSpieler gibt auf dem Bildschirm aus, welcher Spieler gerade am Zug ist.
+	 * 
+	 * @param spieler	wenn true ist die Ziege dran, wenn false der Tiger.
+	 */
 	public static void zeigeSpieler(Boolean spieler) {
 		if (spieler) {
 			System.out.println("Ziege ist am Zug");
@@ -66,22 +78,25 @@ public class View {
 		}
 	}
 
-	// zeigeSpielInfo gibt die Anzahl der gesetzten und gefessenen Ziegen auf dem
-	// Bildschirm aus.
+	/** 
+	 * zeigeSpielInfo gibt die Anzahl der gesetzten und gefessenen Ziegen auf dem Bildschirm aus.
+	 */
 	public void zeigeSpielInfo() {
 		System.out.println("Anzahl gefressener Ziegen : " + spiel.getZiegenGefressen());
 		System.out.println("Anzahl zu setzender Ziegen : " + (20 - spiel.getZiegenGesetzt()));
 		System.out.println("Anzahl gefangener Tiger : " + spiel.tigerGefangen());
 	}
 
-	// ziegeVerloren gibt einen Text auf dem Bildschirm aus wenn der Spieler Ziege
-	// verloren hat.
+	/**
+	 *  ziegeVerloren gibt einen Text auf dem Bildschirm aus wenn der Spieler Ziege verloren hat.
+	 */
 	public static void ziegeVerloren() {
 		System.out.println("\nEs wurden 5 Ziegen gefressen!\n Spieler Tiger hat gewonnen!");
 	}
 
-	// tigerVerloren gibt einen Text auf dem Bildschirm aus wenn der Spieler Ziege
-	// verloren hat.
+	/**
+	 *  tigerVerloren gibt einen Text auf dem Bildschirm aus wenn der Spieler Ziege verloren hat.
+	 */
 	public static void tigerVerloren() {
 		System.out.println("\nEs wurden alle Tiger gefangen!\n Spieler Ziege hat gewonnen!");
 	}

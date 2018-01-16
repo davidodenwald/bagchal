@@ -1,4 +1,7 @@
-
+/**
+ * Position ist ein Objekt mit x und y Variablen.
+ * 
+ */
 public class Position {
 	public int zeile;
 	public int spalte;
@@ -13,11 +16,19 @@ public class Position {
 		this.spalte = spalte;
 	}
 
+	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "(Zeile: " + zeile + ", Spalte: " + spalte + ")";
 	}
 
+	
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

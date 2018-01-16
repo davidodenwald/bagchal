@@ -1,3 +1,7 @@
+/**
+ * SpielFeld ist das Model des Spiels, der alle Eingaben prüft
+ * und Figuren bewegt.
+ */
 public class SpielFeld {
 	private Tiger[] tiger = new Tiger[4];
 	private Ziege[] ziegen = new Ziege[20];
@@ -31,6 +35,7 @@ public class SpielFeld {
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 2, 1, 0, 1 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0, 2, 1, 0 } };
 
+	
 	public SpielFeld() {
 		tiger[0] = new Tiger(new Position(0, 0));
 		tiger[1] = new Tiger(new Position(0, 4));
@@ -53,61 +58,19 @@ public class SpielFeld {
 		return ziegenGefressen;
 	}
 
-<<<<<<< HEAD
 	public Tiger[] getTiger() {
 		return tiger;
 	}
 
 	public Ziege[] getZiegen() {
 		return ziegen;
-=======
-	// anzeigen gibt das aktuelle Spielfeld auf dem Bildschirm aus
-	public void anzeigen() {
-		String pfade = "|/|\\|/|\\|";
-		Position position = new Position();
-
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				position.zeile = i;
-				position.spalte = j;
-
-				// Prüfen ob an der aktuellen Position ein Tiger sitzt
-				boolean tierGefunden = false;
-				for (int t = 0; t < tiger.length; t++) {
-					if (position.equals(tiger[t].getPosition())) {
-						System.out.print("T");
-						tierGefunden = true;
-					}
-				}
-
-				// Prüfen ob an der aktuellen Position eine Ziege sitzt
-				for (int z = 0; z < ziegen.length; z++) {
-					if (!ziegen[z].tot && position.equals(ziegen[z].getPosition())) {
-						System.out.print("Z");
-						tierGefunden = true;
-					}
-				}
-				// leeres Feld anzeigen wenn kein Tier an der Stelle sitzt
-				if (!tierGefunden) {
-					System.out.print("+");
-				}
-
-				// Striche werden zwischen dem ersten und letzen
-				// Element gezeichnet
-				if (j < 4) {
-					System.out.print("-");
-				}
-			}
-			// Pfade werden nach der letzten Zeile nich ausgegeben
-			if (i < 4) {
-				System.out.println("\n" + pfade);
-			}
-		}
-		System.out.println();
->>>>>>> 0eb051b6aaa244cd9959ab7ea8e73be0dfccdc08
 	}
 
-	// setzteZiege setzt eine Ziege auf das Spielfeld
+	/**
+	 *  setzteZiege setzt eine Ziege auf das Spielfeld
+	 * 
+	 * @param pos	ist die Position, an die eine neue Ziege gesetzt werden soll.
+	 */
 	public void setzteZiege(Position pos) {
 		if (!validePosition(pos)) {
 			throw new IllegalArgumentException("An diese Position kann keine Ziege gesetzt werden: " + pos);
@@ -123,7 +86,12 @@ public class SpielFeld {
 		throw new UnsupportedOperationException("Es wurden schon alle Ziegen gesetzt");
 	}
 
-	// bewegeZiege setzt eine Ziege auf eine neue Position
+	/**
+	 * bewegeZiege setzt eine Ziege auf eine neue Position.
+	 * 
+	 * @param alt	ist die ursprüngliche Position auf dem die Ziege sitzt.
+	 * @param neu	ist die neue Position auf die die Ziege bewegt werden soll.
+	 */
 	public void bewegeZiege(Position alt, Position neu) {
 		if (!validePosition(neu)) {
 			throw new IllegalArgumentException("An diese Position kann keine Ziege bewegt werden: " + neu);
@@ -134,8 +102,14 @@ public class SpielFeld {
 		ziegen[ziegeAnPosition(alt)].setPosition(neu);
 	}
 
-	// ziegeAnPosition gibt für eine Position den
-	// passenden Index im Ziegenarray zurück
+	/**
+	 *  ziegeAnPosition gibt für eine Position den passenden Index im Ziegenarray zurück.
+	 *  Wenn auf der Position keine Ziege sitzt wird eine IllegalArgumentException geworfen.
+	 * 
+	 * @param pos	Die Position, an der eine Ziege sitzt.
+	 * 
+	 * @return		Der Index im Ziegenarray, der passenden Ziege.
+	 */
 	private int ziegeAnPosition(Position pos) {
 		for (int i = 0; i < ziegen.length; i++) {
 			if (!ziegen[i].tot && pos.equals(ziegen[i].getPosition())) {
@@ -145,6 +119,14 @@ public class SpielFeld {
 		throw new IllegalArgumentException("Keine Ziege auf dieser Position.");
 	}
 
+	/**
+	 * bewegeTiger setzt einen Tiger auf eine neue Position.
+	 * Das kann bei einem Tiger entweder über einen normalen Zug oder über einen Sprung geschehen.
+	 * Diese Unterscheidung übernimmt diese Methode automatisch.
+	 * 
+	 * @param alt	ist die ursprüngliche Position auf dem der Tiger sitzt.
+	 * @param neu	ist die neue Position auf die der Tiger bewegt werden soll.
+	 */
 	public void bewegeTiger(Position alt, Position neu) {
 		boolean sprung = false;
 		if (!validePosition(neu)) {
@@ -170,8 +152,13 @@ public class SpielFeld {
 		throw new IllegalArgumentException("Keine Ziege auf dieser Position.");
 	}
 
-	// validePosition prüft ob sich eine Postition im Spielfeld befindet
-	// und noch kein Tier auf dieser Position sitzt.
+	/**
+	 * validePosition prüft ob sich eine Postition im Spielfeld befindet und noch kein Tier auf dieser Position sitzt.
+	 * 
+	 * @param pos	die zu prüfende Position.
+	 * 
+	 * @return		true wenn valide.
+	 */
 	private boolean validePosition(Position pos) {
 		if (pos.spalte > 4 || pos.spalte < 0 || pos.zeile > 4 || pos.zeile < 0) {
 			return false;
@@ -189,7 +176,14 @@ public class SpielFeld {
 		return true;
 	}
 
-	// validerZug prüft ob ein Zug mit einer Spielfigur erlaubt ist
+	/**
+	 *  validerZug prüft ob ein Zug mit einer Spielfigur erlaubt ist
+	 * 
+	 * @param alt	die ursprüngliche Position.
+	 * @param neu	die neue Position.
+	 * 
+	 * @return		true wenn Zug erlaubt.
+	 */
 	private static boolean validerZug(Position alt, Position neu) {
 		int u = alt.zeile * 5 + alt.spalte;
 		int v = neu.zeile * 5 + neu.spalte;
@@ -199,7 +193,14 @@ public class SpielFeld {
 		return false;
 	}
 
-	// validerSprung prüft ob ein Sprung mit einem Tiger erlaubt ist
+	/**
+	 *  validerSprung prüft ob ein Sprung mit einem Tiger erlaubt ist
+	 * 
+	 * @param alt	die ursprüngliche Position.
+	 * @param neu	die neue Position.
+	 * 
+	 * @return
+	 */
 	private boolean validerSprung(Position alt, Position neu) {
 		int u = alt.zeile * 5 + alt.spalte;
 		int v = neu.zeile * 5 + neu.spalte;
@@ -215,11 +216,14 @@ public class SpielFeld {
 		return false;
 	}
 
-<<<<<<< HEAD
-	// positionZwischen gibt eine Position zwischen 2 Positionen zurück.
-=======
-	// positionZwischen gibt eine Position zwischen 2 Positionen (alt, neu) zurück.
->>>>>>> 0eb051b6aaa244cd9959ab7ea8e73be0dfccdc08
+	/**
+	 *  positionZwischen gibt eine Position zwischen 2 Positionen zurück.
+	 * 
+	 * @param alt	die ursprüngliche Position.
+	 * @param neu	die neue Position.
+	 * 
+	 * @return		die Position, die sich zwischen den Position alt und neu befindet.
+	 */
 	private static Position positionZwischen(Position alt, Position neu) {
 		Position mitte = new Position();
 		if (neu.zeile - alt.zeile != 0) {
@@ -234,8 +238,12 @@ public class SpielFeld {
 		}
 		return mitte;
 	}
-<<<<<<< HEAD
 
+	/**
+	 *  tigerGefangen berechnet die Anzahl der gefangen Tiger.
+	 * 
+	 * @return 	die Anzahl der gefangenen Tiger.
+	 */
 	public int tigerGefangen() {
 		int gefangen = 0;
 		Position neu = new Position();
@@ -260,6 +268,4 @@ public class SpielFeld {
 		}
 		return gefangen;
 	}
-=======
->>>>>>> 0eb051b6aaa244cd9959ab7ea8e73be0dfccdc08
 }

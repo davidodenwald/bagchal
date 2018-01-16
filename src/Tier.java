@@ -1,4 +1,7 @@
-
+/**
+ * Tier ist die Superklasse für Tiger und Ziegen.
+ * Hier werden Methoden implementiert, die beide Tiere benutzen.
+ */
 public class Tier {
 	private Position position;
 
