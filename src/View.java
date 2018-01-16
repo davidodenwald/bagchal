@@ -4,7 +4,12 @@
 public class View {
 
 	private SpielFeld spiel;
-
+	
+	/**
+	 * Erstellt ein View-Objekt.
+	 * 
+	 * @param spiel	Das Spielfeld auf dem gespielt wird.
+	 */
 	public View(SpielFeld spiel) {
 		this.spiel = spiel;
 	}

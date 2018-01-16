@@ -35,7 +35,9 @@ public class SpielFeld {
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 2, 1, 0, 1 },
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0, 2, 1, 0 } };
 
-	
+	/**
+	 * Erstellt ein Spielfeld-Objekt.
+	 */
 	public SpielFeld() {
 		tiger[0] = new Tiger(new Position(0, 0));
 		tiger[1] = new Tiger(new Position(0, 4));

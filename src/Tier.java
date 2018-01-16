@@ -5,6 +5,11 @@
 public class Tier {
 	private Position position;
 
+	/**
+	 * Erstellt ein Tier Obejt, das auf einer Position sitzt.
+	 * 
+	 * @param position	die Position auf dem Spielfeld auf dem das Tier sitzt.
+	 */
 	public Tier(Position position) {
 		this.position = position;
 	}
