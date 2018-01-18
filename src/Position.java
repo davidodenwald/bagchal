@@ -3,7 +3,15 @@
  * Kann genutzt werden um eine Position auf einem Spielfeld darzustellen.
  */
 public class Position {
+	
+	/*
+	 * Die Zeile der Position
+	 */
 	public int zeile;
+	
+	/**
+	 * Die Spalte der Position
+	 */
 	public int spalte;
 
 	/**
